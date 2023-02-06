@@ -1,25 +1,40 @@
-<h1 class="mt-5">Agregar Producto</h1><hr>
-<form>
+<h1 class="mt-5">Agregar Producto</h1>
+<hr />
+<form [formGroup]="miFormulario">
   <div class="row">
     <div class="row g-3 align-items-center mb-3">
       <div class="col-auto">
         <label for="" class="col-form-label">Nombre:</label>
       </div>
       <div class="col-auto">
-        <input type="text" class="form-control">
+        <input formControlName="nombre" type="text" class="form-control" />
       </div>
       <div class="col-auto">
-        <span class="form-text">Este campo es requerido</span>
+        <span
+          color="red"
+          error-msg
+          [condicional]="miFormulario.valid"
+          msg="Este campo es obligatorio"
+        ></span>
       </div>
     </div>
   </div>
   <div class="row mt-3">
     <div class="col">
-      <button class="btn btn-primary">
-        Guardar
-      </button>
+      <button (click)="cambiarNombre()" class="btn btn-primary">Cambiar Nombre</button>
+      <button (click)="cambiarColor()" class="btn btn-primary ms-2">CAmbiar color</button>
     </div>
   </div>
 </form>
 
 <h3 class="mt-5">Formulario</h3>
+<h5>miFormulario.value</h5>
+<pre>{{ miFormulario.value | json }}</pre>
+<h5>miFormulario.valid</h5>
+<pre>{{ miFormulario.valid | json }}</pre>
+
+<div class="row mt-5" *CustomIf="miFormulario.valid">
+  <div class="col">
+    <div class="alert alert-primary">Todo Ok!</div>
+  </div>
+</div>
